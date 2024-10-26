@@ -7,10 +7,6 @@ Executa comenzile de mai jos pentru a rula proiectul local
 ```bash
 git clone https://github.com/ciocan/sicap-pnrr.git
 cd sicap-pnrr
-
-# dezactiveaza fisierele .zip din diretorul sources/pnrr (contin datele in format csv)
-unzip -q sources/pnrr/*.zip -d sources/pnrr/
-
 npm install
 npm run sources
 npm run dev -- --host 0.0.0.0
