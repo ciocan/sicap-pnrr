@@ -4,19 +4,27 @@ description: statistici achizitii directe pnrr
 ---
 
 ```sql achizitii_directe_total
-  select count(*) as total from achizitii_directe
+  select count(*) as total 
+  from achizitii_directe 
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
 ```
 
 ```sql achizitii_directe_total_valoare
-  select sum("item.closingValue") as total from pnrr.achizitii_directe
+  select sum("item.closingValue") as total 
+  from pnrr.achizitii_directe 
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
 ```
 
 ```sql achizitii_directe_total_beneficiari
-  select count(distinct "supplier.entityId") as total from pnrr.achizitii_directe
+  select count(distinct "supplier.entityId") as total 
+  from pnrr.achizitii_directe 
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
 ```
 
 ```sql achizitii_directe_total_autoritati
-  select count(distinct "authority.entityId") as total from pnrr.achizitii_directe
+  select count(distinct "authority.entityId") as total 
+  from pnrr.achizitii_directe 
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
 ```
 
 <BigValue 
@@ -53,6 +61,7 @@ description: statistici achizitii directe pnrr
     "item.cpvCode" as CPV,
     sum("item.closingValue") as valoare
   from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "item.cpvCode"
   order by nr desc
 ```
@@ -73,6 +82,7 @@ description: statistici achizitii directe pnrr
     "authority.county" as judet,
     sum("item.closingValue") as valoare
   from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "authority.county"
   order by total_achizitii desc
 ```
@@ -91,6 +101,7 @@ description: statistici achizitii directe pnrr
     "supplier.county" as judet,
     sum("item.closingValue") as valoare
   from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "supplier.county"
   order by total_achizitii desc
 ```
@@ -111,7 +122,8 @@ description: statistici achizitii directe pnrr
     count(*) as total_achizitii,
     count(distinct "authority.entityId") as total_autoritati
   from pnrr.achizitii_directe
-  where "item.closingValue" > 100000
+  where 
+    "item.closingValue" > 100000 and "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "supplier.entityId", "supplier.entityName", "supplier.fiscalNumber"
   order by sum("item.closingValue") desc
 ```
