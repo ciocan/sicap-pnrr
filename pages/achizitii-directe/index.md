@@ -69,9 +69,9 @@ description: statistici achizitii directe pnrr
 ## Valoare achizitii directe pe coduri CPV
 
 <DataTable data={achizitii_directe_by_cpv} rowShading=true search=true>
-  <Column id="nr" header="Nr" />
-  <Column id="CPV" header="CPV" />
-  <Column id="valoare" header="Valoare" fmt="num2m" />
+  <Column id="nr" title="Nr" />
+  <Column id="CPV" title="CPV" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
 </DataTable>
 
 ## Achizitii directe pe judete (autoritate)
@@ -88,9 +88,9 @@ description: statistici achizitii directe pnrr
 ```
 
 <DataTable data={achizitii_directe_by_judete} rowShading=true search=true>
-  <Column id="judet" header="Judet" />
-  <Column id="valoare" header="Valoare" fmt="num2m" />
-  <Column id="total_achizitii" header="Total achizitii" />
+  <Column id="judet" title="Judet" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
 
 ## Achizitii directe pe judete (beneficiar)
@@ -107,9 +107,9 @@ description: statistici achizitii directe pnrr
 ```
 
 <DataTable data={achizitii_directe_by_beneficiar} rowShading=true search=true>
-  <Column id="judet" header="Judet" />
-  <Column id="valoare" header="Valoare" fmt="num2m" />
-  <Column id="total_achizitii" header="Total achizitii" />
+  <Column id="judet" title="Judet" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
 
 <LineBreak/>
@@ -129,18 +129,19 @@ description: statistici achizitii directe pnrr
   order by sum("item.closingValue") desc
 ```
 
-<DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true>
-  <Column id="cod_fiscal" header="Cod fiscal" />
-  <Column id="beneficiar" header="Beneficiar" />
-  <Column id="valoare" header="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" header="Nr achizitii" />
-  <Column id="nr_autoritati" header="Nr autoritati" />
+<DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true rows=20>
+  <Column id="cod_fiscal" title="Cod fiscal" />
+  <Column id="beneficiar" title="Beneficiar" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="nr_achizitii" title="Nr achizitii" />
+  <Column id="nr_autoritati" title="Nr autoritati" />
 </DataTable>
 
 ## Lista autoritati contractante
 
 ```sql lista_autoritati
   select
+    concat('autoritate-', cast("authority.entityId" as integer)) as url,
     "authority.fiscalNumber" as cod_fiscal,
     "authority.entityName" as autoritate_contractanta,
     sum("item.closingValue") as valoare,
@@ -152,10 +153,10 @@ description: statistici achizitii directe pnrr
   order by sum("item.closingValue") desc
 ```
 
-<DataTable data={lista_autoritati} rowShading=true search=true>
-  <Column id="cod_fiscal" header="Cod fiscal" />
-  <Column id="autoritate_contractanta" header="Autoritate contractanta" />
-  <Column id="valoare" header="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" header="Nr achizitii" />
-  <Column id="nr_beneficiari" header="Nr beneficiari" />
+<DataTable data={lista_autoritati} rowShading=true search=true rows=20>
+  <Column id="cod_fiscal" title="Cod fiscal" />
+  <Column id="url" title="Autoritate contractanta" contentType=link linkLabel=autoritate_contractanta />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="nr_achizitii" title="Nr achizitii" />
+  <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
