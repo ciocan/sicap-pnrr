@@ -1,6 +1,6 @@
 ---
-title: Achizitii directe
-description: statistici achizitii directe pnrr
+title: Achizitii directe PNRR
+description: Statistici achizitii directe PNRR
 ---
 
 ```sql achizitii_directe_total

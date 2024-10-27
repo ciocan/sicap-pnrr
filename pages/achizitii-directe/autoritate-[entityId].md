@@ -5,7 +5,25 @@ description: statistici achizitii directe pnrr
 # <Value data={achizitii_directe_autoritate} row=0 column="authority.entityName" />
 ## <Value data={achizitii_directe_autoritate} row=0 column="authority.city" />, <Value data={achizitii_directe_autoritate} row=0 column="authority.county" />
 
-#### <Value data={achizitie_stats} column=total_beneficiari /> beneficiari, <Value data={achizitie_stats} column=total_achizitii /> achizitii, in valoare totala de <Value data={achizitie_stats} column=total_valoare fmt=num2m color=green /> RON
+<BigValue 
+  data={achizitie_stats} 
+  value=total_achizitii
+  title="Achizitii"
+/>
+
+<BigValue 
+  data={achizitie_stats} 
+  value=total_beneficiari
+  title="Beneficiari"
+/>
+
+<BigValue 
+  data={achizitie_stats} 
+  value=total_valoare
+  title="Valoare"
+  fmt="num2m"
+  color=green
+/>
 
 ```sql achizitie_stats
   select 
