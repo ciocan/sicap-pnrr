@@ -1,6 +1,6 @@
 ---
 title: Achizitii directe
-description: statistici achizitii directe 
+description: statistici achizitii directe pnrr
 ---
 
 ```sql achizitii_directe_total
@@ -105,9 +105,8 @@ description: statistici achizitii directe
 
 ```sql achizitii_directe_beneficiari_valoare_mare
   select
-    "supplier.fiscalNumber",
-    "supplier.entityId",
-    "supplier.entityName",
+    "supplier.fiscalNumber" as cod_fiscal,
+    "supplier.entityName" as beneficiar,
     sum("item.closingValue") as valoare,
     count(*) as total_achizitii,
     count(distinct "authority.entityId") as total_autoritati
@@ -118,8 +117,8 @@ description: statistici achizitii directe
 ```
 
 <DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true>
-  <Column id="supplier.fiscalNumber" header="Cod fiscal" />
-  <Column id="supplier.entityName" header="Beneficiar" />
+  <Column id="cod_fiscal" header="Cod fiscal" />
+  <Column id="beneficiar" header="Beneficiar" />
   <Column id="total_achizitii" header="Nr achizitii" />
   <Column id="total_autoritati" header="Nr autoritati" />
   <Column id="valoare" header="Valoare" fmt="num2m" />
