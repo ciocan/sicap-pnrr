@@ -112,26 +112,50 @@ description: statistici achizitii directe pnrr
   <Column id="total_achizitii" header="Total achizitii" />
 </DataTable>
 
-## Lista beneficiari cu valoare totala mai mare de 100.000 de lei
+<LineBreak/>
+
+## Lista beneficiari
 
 ```sql achizitii_directe_beneficiari_valoare_mare
   select
     "supplier.fiscalNumber" as cod_fiscal,
     "supplier.entityName" as beneficiar,
     sum("item.closingValue") as valoare,
-    count(*) as total_achizitii,
-    count(distinct "authority.entityId") as total_autoritati
+    count(*) as nr_achizitii,
+    count(distinct "authority.entityId") as nr_autoritati
   from pnrr.achizitii_directe
-  where 
-    "item.closingValue" > 100000 and "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-  group by "supplier.entityId", "supplier.entityName", "supplier.fiscalNumber"
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+  group by all
   order by sum("item.closingValue") desc
 ```
 
 <DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true>
   <Column id="cod_fiscal" header="Cod fiscal" />
   <Column id="beneficiar" header="Beneficiar" />
-  <Column id="total_achizitii" header="Nr achizitii" />
-  <Column id="total_autoritati" header="Nr autoritati" />
   <Column id="valoare" header="Valoare" fmt="num2m" />
+  <Column id="nr_achizitii" header="Nr achizitii" />
+  <Column id="nr_autoritati" header="Nr autoritati" />
+</DataTable>
+
+## Lista autoritati contractante
+
+```sql lista_autoritati
+  select
+    "authority.fiscalNumber" as cod_fiscal,
+    "authority.entityName" as autoritate_contractanta,
+    sum("item.closingValue") as valoare,
+    count(*) as nr_achizitii,
+    count(distinct "supplier.entityId") as nr_beneficiari
+  from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+  group by all
+  order by sum("item.closingValue") desc
+```
+
+<DataTable data={lista_autoritati} rowShading=true search=true>
+  <Column id="cod_fiscal" header="Cod fiscal" />
+  <Column id="autoritate_contractanta" header="Autoritate contractanta" />
+  <Column id="valoare" header="Valoare" fmt="num2m" />
+  <Column id="nr_achizitii" header="Nr achizitii" />
+  <Column id="nr_beneficiari" header="Nr beneficiari" />
 </DataTable>
