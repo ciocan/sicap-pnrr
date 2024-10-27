@@ -9,3 +9,4 @@ static/data
 .env
 .evidence/meta
 
+.vercel
