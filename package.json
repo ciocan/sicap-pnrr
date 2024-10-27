@@ -2,12 +2,12 @@
 	"name": "sicap-pnrr",
 	"version": "0.0.1",
 	"scripts": {
-		"build": "evidence build",
-		"build:strict": "evidence build:strict",
-		"dev": "evidence dev --open /",
-		"test": "evidence build",
+		"build": "VITE_EVIDENCE_SPA=true evidence build",
+		"build:strict": "VITE_EVIDENCE_SPA=true evidence build:strict",
+		"dev": "VITE_EVIDENCE_SPA=true evidence dev --open /",
+		"test": "VITE_EVIDENCE_SPA=true evidence build",
 		"sources": "evidence sources",
-		"preview": "evidence preview"
+		"preview": "VITE_EVIDENCE_SPA=true evidence preview"
 	},
 	"engines": {
 		"npm": ">=7.0.0",
@@ -34,5 +34,8 @@
 		"trim@<0.0.3": ">0.0.3",
 		"sqlite3": "5.1.5",
 		"axios": "^1.7.4"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-static": "^3.0.6"
 	}
 }
