@@ -105,6 +105,7 @@ description: Statistici licitatii publice PNRR
     "noticeContracts.items.winners.name" as beneficiar
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
+  where "item.sysProcedureState.text" = 'Atribuita'
   group by all
   order by valoare desc
 ```
@@ -112,7 +113,32 @@ description: Statistici licitatii publice PNRR
 <DataTable data={licitatii_publice_beneficiari_valoare_mare} rowShading=true search=true>
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="beneficiar" title="Beneficiar" />
-  <Column id="valoare" title="Valoare" fmt="num2b" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_licitatii" title="Nr licitatii" />
   <Column id="nr_autoritati" title="Nr autoritati" />
+</DataTable>
+
+## Lista autoritati contractante
+
+```sql licitatii_publice_autoritati_valoare_mare
+  select
+    concat('autoritate-', "item.nationalId") as url,
+    "item.nationalId" as cod_fiscal,
+    substring("item.contractingAuthorityNameAndFN", position('-' in "item.contractingAuthorityNameAndFN") + 1) as autoritate_contractanta,
+    sum(distinct "item.ronContractValue") as valoare,
+    count(distinct "item.noticeNo") as nr_licitatii,
+    count(distinct winners) as nr_beneficiari
+  from licitatii_publice,
+    unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
+  where "item.sysProcedureState.text" = 'Atribuita'
+  group by all
+  order by valoare desc
+```
+
+<DataTable data={licitatii_publice_autoritati_valoare_mare} rowShading=true search=true>
+  <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
+  <Column id="autoritate_contractanta" title="Autoritate contractanta" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="nr_licitatii" title="Nr licitatii" />
+  <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
