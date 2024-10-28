@@ -74,44 +74,6 @@ description: Statistici achizitii directe PNRR
   <Column id="valoare" title="Valoare" fmt="num2m" />
 </DataTable>
 
-## Achizitii directe pe judete (autoritate)
-
-```sql achizitii_directe_by_judete
-  select
-    count(*) as total_achizitii, 
-    "authority.county" as judet,
-    sum("item.closingValue") as valoare
-  from pnrr.achizitii_directe
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-  group by "authority.county"
-  order by total_achizitii desc
-```
-
-<DataTable data={achizitii_directe_by_judete} rowShading=true search=true>
-  <Column id="judet" title="Judet" />
-  <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="total_achizitii" title="Total achizitii" />
-</DataTable>
-
-## Achizitii directe pe judete (beneficiar)
-
-```sql achizitii_directe_by_beneficiar
-  select
-    count(*) as total_achizitii, 
-    "supplier.county" as judet,
-    sum("item.closingValue") as valoare
-  from pnrr.achizitii_directe
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-  group by "supplier.county"
-  order by total_achizitii desc
-```
-
-<DataTable data={achizitii_directe_by_beneficiar} rowShading=true search=true>
-  <Column id="judet" title="Judet" />
-  <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="total_achizitii" title="Total achizitii" />
-</DataTable>
-
 <LineBreak/>
 
 ## Lista beneficiari
@@ -154,9 +116,47 @@ description: Statistici achizitii directe PNRR
 ```
 
 <DataTable data={lista_autoritati} rowShading=true search=true rows=20>
-  <Column id="cod_fiscal" title="Cod fiscal" />
-  <Column id="url" title="Autoritate contractanta" contentType=link linkLabel=autoritate_contractanta />
+  <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
+  <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_achizitii" title="Nr achizitii" />
   <Column id="nr_beneficiari" title="Nr beneficiari" />
+</DataTable>
+
+## Achizitii directe pe judete (autoritate)
+
+```sql achizitii_directe_by_judete
+  select
+    count(*) as total_achizitii, 
+    "authority.county" as judet,
+    sum("item.closingValue") as valoare
+  from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+  group by "authority.county"
+  order by total_achizitii desc
+```
+
+<DataTable data={achizitii_directe_by_judete} rowShading=true search=true>
+  <Column id="judet" title="Judet" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_achizitii" title="Total achizitii" />
+</DataTable>
+
+## Achizitii directe pe judete (beneficiar)
+
+```sql achizitii_directe_by_beneficiar
+  select
+    count(*) as total_achizitii, 
+    "supplier.county" as judet,
+    sum("item.closingValue") as valoare
+  from pnrr.achizitii_directe
+  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+  group by "supplier.county"
+  order by total_achizitii desc
+```
+
+<DataTable data={achizitii_directe_by_beneficiar} rowShading=true search=true>
+  <Column id="judet" title="Judet" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
