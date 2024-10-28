@@ -1,6 +1,6 @@
 ---
 title: Beneficiar
-description: statistici achizitii directe pnrr beneficiar
+description: statistici achizitii directe beneficiar pnrr
 ---
 
 # <Value data={achizitii_directe_beneficiar} row=0 column="supplier.entityName" />
@@ -52,5 +52,7 @@ description: statistici achizitii directe pnrr beneficiar
   <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="authority.fiscalNumber" title="Cod fiscal" />
   <Column id="authority.entityName" title="Autoritate contractanta" />
+  <Column id="authority.city" title="Oras" />
+  <Column id="authority.county" title="Judet" />
   <Column id="item.cpvCode" title="Cod CPV" />
 </DataTable>
