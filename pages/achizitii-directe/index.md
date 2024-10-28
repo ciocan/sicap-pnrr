@@ -70,8 +70,8 @@ description: Statistici achizitii directe PNRR
 
 <DataTable data={achizitii_directe_by_cpv} rowShading=true search=true>
   <Column id="nr" title="Nr" />
-  <Column id="CPV" title="CPV" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="CPV" title="CPV" />
 </DataTable>
 
 <LineBreak/>
@@ -124,40 +124,40 @@ description: Statistici achizitii directe PNRR
   <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
 
-## Achizitii directe pe judete (autoritate)
+## Achizitii directe pe orase (autoritate)
 
-```sql achizitii_directe_by_judete
+```sql achizitii_directe_by_city_autoritate
   select
     count(*) as total_achizitii, 
-    "authority.county" as judet,
+    "authority.city" as oras,
     sum("item.closingValue") as valoare
   from pnrr.achizitii_directe
   where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-  group by "authority.county"
+  group by oras
   order by total_achizitii desc
 ```
 
-<DataTable data={achizitii_directe_by_judete} rowShading=true search=true>
-  <Column id="judet" title="Judet" />
+<DataTable data={achizitii_directe_by_city_autoritate} rowShading=true search=true>
+  <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
 
-## Achizitii directe pe judete (beneficiar)
+## Achizitii directe pe orase (beneficiar)
 
-```sql achizitii_directe_by_beneficiar
+```sql achizitii_directe_by_city_beneficiar
   select
     count(*) as total_achizitii, 
-    "supplier.county" as judet,
+    "supplier.city" as oras,
     sum("item.closingValue") as valoare
   from pnrr.achizitii_directe
   where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-  group by "supplier.county"
+  group by oras
   order by total_achizitii desc
 ```
 
-<DataTable data={achizitii_directe_by_beneficiar} rowShading=true search=true>
-  <Column id="judet" title="Judet" />
+<DataTable data={achizitii_directe_by_city_beneficiar} rowShading=true search=true>
+  <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
