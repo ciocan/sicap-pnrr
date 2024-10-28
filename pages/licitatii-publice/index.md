@@ -142,3 +142,53 @@ description: Statistici licitatii publice PNRR
   <Column id="nr_licitatii" title="Nr licitatii" />
   <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
+
+## Licitatii pe orase (autoritate contractanta)
+
+```sql licitatii_publice_by_city_autoritate
+  select
+    count(*) as total_licitatii,
+    coalesce(
+      nullif("publicNotice.caNoticeEdit_New_U.section1_New_U.section1_1.caAddress.city", '-'),
+      nullif("publicNotice.caNoticeEdit_New.section1_New.section1_1.caAddress.city", '-')
+    ) as oras,
+    sum("item.ronContractValue") as valoare
+  from licitatii_publice
+  where "item.sysProcedureState.text" = 'Atribuita'
+  group by oras
+  order by total_licitatii desc
+```
+
+<DataTable data={licitatii_publice_by_city_autoritate} rowShading=true search=true>
+  <Column id="oras" title="Oras" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_licitatii" title="Total licitatii" />
+</DataTable>
+
+## Licitatii pe orase (beneficiar)
+
+```sql licitatii_publice_by_city_beneficiar
+  select
+    count(distinct "item.noticeNo") as total_licitatii,
+    trim(t.oras) as oras,
+    sum(distinct "item.ronContractValue") as valoare
+  from licitatii_publice,
+    unnest(
+      string_split(
+        coalesce(
+          nullif("noticeContracts.items.winner.address.city", '-'),
+          nullif("noticeContracts.items.winners.address.city", '-')
+        ),
+        ','
+      )
+    ) as t(oras)
+  where "item.sysProcedureState.text" = 'Atribuita'
+  group by trim(t.oras)
+  order by total_licitatii desc
+```
+
+<DataTable data={licitatii_publice_by_city_beneficiar} rowShading=true search=true>
+  <Column id="oras" title="Oras" />
+  <Column id="valoare" title="Valoare" fmt="num2m" />
+  <Column id="total_licitatii" title="Total licitatii" />
+</DataTable>
