@@ -90,3 +90,29 @@ description: Statistici licitatii publice PNRR
   <Column id="nr_autoritati" title="Nr autoritati" />
   <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
+
+<LineBreak/>
+
+## Lista beneficiari
+
+```sql licitatii_publice_beneficiari_valoare_mare
+  select
+    concat('beneficiar-', trim(winners)) as url,
+    winners as cod_fiscal,
+    count(distinct "item.noticeNo") as nr_licitatii,
+    sum(distinct "item.ronContractValue") as valoare,
+    count(distinct "item.contractingAuthorityNameAndFN") as nr_autoritati,
+    "noticeContracts.items.winners.name" as beneficiar
+  from licitatii_publice,
+    unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
+  group by all
+  order by valoare desc
+```
+
+<DataTable data={licitatii_publice_beneficiari_valoare_mare} rowShading=true search=true>
+  <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
+  <Column id="beneficiar" title="Beneficiar" />
+  <Column id="valoare" title="Valoare" fmt="num2b" />
+  <Column id="nr_licitatii" title="Nr licitatii" />
+  <Column id="nr_autoritati" title="Nr autoritati" />
+</DataTable>
