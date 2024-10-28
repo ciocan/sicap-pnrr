@@ -80,6 +80,7 @@ description: Statistici achizitii directe PNRR
 
 ```sql achizitii_directe_beneficiari_valoare_mare
   select
+    concat('beneficiar-', cast("supplier.entityId" as integer)) as url,
     "supplier.fiscalNumber" as cod_fiscal,
     "supplier.entityName" as beneficiar,
     sum("item.closingValue") as valoare,
@@ -92,7 +93,7 @@ description: Statistici achizitii directe PNRR
 ```
 
 <DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true rows=20>
-  <Column id="cod_fiscal" title="Cod fiscal" />
+  <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="beneficiar" title="Beneficiar" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_achizitii" title="Nr achizitii" />
