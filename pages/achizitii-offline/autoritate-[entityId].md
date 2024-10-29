@@ -42,7 +42,7 @@ description: statistici achizitii offline pnrr
   where "authority.entityId" = '${params.entityId}'
 ```
 
-<DataTable data={achizitii_offline_autoritate} rowShading=true search=true rows=50>
+<DataTable data={achizitii_offline_autoritate} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.noticeNo" />
   <Column id="item.awardedValue" title="Valoare" fmt="num2k" contentType=colorscale />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />

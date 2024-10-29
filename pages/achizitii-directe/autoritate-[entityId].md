@@ -43,12 +43,12 @@ description: statistici achizitii directe pnrr
   order by "item.publicationDate" desc
 ```
 
-<DataTable data={achizitii_directe_autoritate} rowShading=true search=true rows=50>
+<DataTable data={achizitii_directe_autoritate} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.uniqueIdentificationCode" />
   <Column id="item.closingValue" title="Valoare" fmt="num2k" contentType=colorscale />
+  <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="item.directAcquisitionName" title="Nume achizitie" />
-  <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="supplier.fiscalNumber" title="Cod fiscal" />
   <Column id="supplier.entityName" title="Beneficiar" />
   <Column id="item.cpvCode" title="Cod CPV" />
