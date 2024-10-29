@@ -44,12 +44,12 @@ description: statistici achizitii directe beneficiar pnrr
   order by "item.publicationDate" desc
 ```
 
-<DataTable data={achizitii_directe_beneficiar} rowShading=true search=true rows=50>
+<DataTable data={achizitii_directe_beneficiar} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.uniqueIdentificationCode" />
   <Column id="item.closingValue" title="Valoare" fmt="num2k" contentType=colorscale />
+  <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="item.directAcquisitionName" title="Nume achizitie" />
-  <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="authority.fiscalNumber" title="Cod fiscal" />
   <Column id="authority.entityName" title="Autoritate contractanta" />
   <Column id="authority.city" title="Oras" />

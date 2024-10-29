@@ -58,7 +58,7 @@ description: statistici licitatii publice pnrr
     case 
       when "item.noticeNo" like 'SCNA%' then concat('https://e-licitatie.ro/pub/notices/ca-notices/view-rfq/', cast("item.caNoticeId" as integer))
       when "item.noticeNo" like 'CAN%' then concat('https://e-licitatie.ro/pub/notices/ca-notices/view-c/', cast("item.caNoticeId" as integer))
-      else concat('https://e-licitatie.ro/pub/notice/view/', cast("item.caNoticeId" as integer))
+      else concat('#/', cast("item.caNoticeId" as integer))
     end as link,
     "item.sysProcedureState.text" as stare_licitatie,
     "noticeContracts.items.winners.name" as beneficiar,
