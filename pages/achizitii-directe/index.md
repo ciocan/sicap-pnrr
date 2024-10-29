@@ -1,59 +1,15 @@
 ---
 title: Achizitii directe PNRR
 description: Statistici achizitii directe PNRR
+queries:
+  - achizitii_directe/total_atribuite.sql
+  - achizitii_directe/total_anulate.sql
+  - achizitii_directe/total_valoare.sql
+  - achizitii_directe/total_beneficiari.sql
+  - achizitii_directe/total_autoritati.sql
 ---
 
-```sql achizitii_directe_total
-  select count(*) as total 
-  from achizitii_directe 
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-```
-
-```sql achizitii_directe_total_valoare
-  select sum("item.closingValue") as total 
-  from pnrr.achizitii_directe 
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-```
-
-```sql achizitii_directe_total_beneficiari
-  select count(distinct "supplier.entityId") as total 
-  from pnrr.achizitii_directe 
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-```
-
-```sql achizitii_directe_total_autoritati
-  select count(distinct "authority.entityId") as total 
-  from pnrr.achizitii_directe 
-  where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
-```
-
-<BigValue 
-  data={achizitii_directe_total} 
-  value=total
-  title="Total achizitii directe"
-  fmt="num"
-/>
-
-<BigValue 
-  data={achizitii_directe_total_valoare} 
-  value=total
-  title="Valoare totala"
-  fmt="num2b"
-/>
-
-<BigValue 
-  data={achizitii_directe_total_beneficiari} 
-  value=total
-  title="Total beneficiari"
-  fmt="num"
-/>
-
-<BigValue 
-  data={achizitii_directe_total_autoritati} 
-  value=total
-  title="Total autoritati"
-  fmt="num"
-/>
+{@partial "achizitii-directe-totals.md"}
 
 ```sql achizitii_directe_by_cpv
   select

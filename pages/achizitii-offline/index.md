@@ -1,55 +1,14 @@
 ---
 title: Achizitii offline PNRR
 description: Statistici achizitii offline PNRR
+queries:
+  - achizitii_offline/total.sql
+  - achizitii_offline/total_valoare.sql 
+  - achizitii_offline/total_beneficiari.sql
+  - achizitii_offline/total_autoritati.sql
 ---
 
-```sql achizitii_offline_total
-  select count(*) as total 
-  from achizitii_offline 
-```
-
-```sql achizitii_offline_total_valoare
-  select sum("item.awardedValue") as total 
-  from achizitii_offline 
-```
-
-```sql achizitii_offline_total_beneficiari
-  select count(distinct "details.noticeEntityAddress.fiscalNumber") as total 
-  from achizitii_offline 
-```
-
-```sql achizitii_offline_total_autoritati
-  select count(distinct "authority.entityId") as total 
-  from achizitii_offline 
-```
-
-<BigValue 
-  data={achizitii_offline_total} 
-  value=total 
-  title="Total achizitii offline"
-  fmt="num"
-/>
-
-<BigValue 
-  data={achizitii_offline_total_valoare} 
-  value=total 
-  title="Valoare totala"
-  fmt="num2m"
-/>
-
-<BigValue 
-  data={achizitii_offline_total_beneficiari} 
-  value=total 
-  title="Total beneficiari"
-  fmt="num"
-/>
-
-<BigValue 
-  data={achizitii_offline_total_autoritati} 
-  value=total 
-  title="Total autoritati"
-  fmt="num"
-/>
+{@partial "achizitii-offline-totals.md"}
 
 ```sql achizitii_offline_by_cpv
   select
