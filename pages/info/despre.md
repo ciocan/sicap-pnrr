@@ -14,4 +14,4 @@ Codul sursa este disponibil sub licenta MIT.
 
 <LineBreak/>
 
-<iframe plausible-embed src="https://plausible.sicap.app/share/pnrr.sicap.ai?auth=gReMHRBIj3KTw_3q9kuNt&embed=true&theme=light" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 770px;"></iframe>
+<iframe plausible-embed src="https://plausible.sicap.app/share/pnrr.sicap.ai?auth=gReMHRBIj3KTw_3q9kuNt&embed=true&theme=light" frameborder="0" loading="lazy" scrolling="no" style="width: 1px; min-width: 100%; height: 1700px;"></iframe>
