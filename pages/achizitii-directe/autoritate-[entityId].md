@@ -51,5 +51,7 @@ description: statistici achizitii directe pnrr
   <Column id="item.directAcquisitionName" title="Nume achizitie" />
   <Column id="supplier.fiscalNumber" title="Cod fiscal" />
   <Column id="supplier.entityName" title="Beneficiar" />
+  <Column id="supplier.city" title="Oras" />
+  <Column id="supplier.county" title="Judet" />
   <Column id="item.cpvCode" title="Cod CPV" />
 </DataTable>
