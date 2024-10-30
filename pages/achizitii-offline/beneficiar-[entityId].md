@@ -50,7 +50,7 @@ description: statistici achizitii offline beneficiar pnrr
   <Column id="details.finalizationDate" title="Data finalizare" fmt="dd-mm-yyyy" />
   <Column id="item.contractObject" title="Nume achizitie" />
   <Column id="authority.fiscalNumber" title="Cod fiscal" />
-  <Column id="authority.entityName" title="Beneficiar" />
+  <Column id="authority.entityName" title="Autoritate" />
   <Column id="authority.city" title="Oras" />
   <Column id="authority.county" title="Judet" />
   <Column id="item.cpvCode" title="Cod CPV" />
