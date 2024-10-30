@@ -20,6 +20,56 @@ queries:
   - licitatii_publice/total_beneficiari.sql
 ---
 
+```sql total_atribuite
+  select sum(total) as total from (
+    select count(*) as total from licitatii_publice where "item.sysProcedureState.text" = 'Atribuita'
+    union all
+    select count(*) as total from achizitii_directe where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+    union all
+    select count(*) as total from achizitii_offline where "details.sysNoticeState.text" = 'Publicat'
+  ) t
+```
+
+```sql total_anulate
+  select sum(total) as total from (
+    select count(*) as total from licitatii_publice where "item.sysProcedureState.text" = 'Anulata'
+    union all
+    select count(*) as total from achizitii_directe where "item.sysDirectAcquisitionState.text" != 'Oferta acceptata'
+    union all
+    select count(*) as total from achizitii_offline where "details.sysNoticeState.text" != 'Publicat'
+  ) t
+```
+
+```sql valoare_totala
+  select sum(valoare_totala) as total from (
+    select sum("item.ronContractValue") as valoare_totala from licitatii_publice where "item.sysProcedureState.text" = 'Atribuita'
+    union all
+    select sum("item.closingValue") as valoare_totala from achizitii_directe where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
+    union all
+    select sum("item.awardedValue") as valoare_totala from achizitii_offline
+  ) t
+```
+
+<BigValue 
+  data={total_atribuite} 
+  value=total
+  title="Total atribuite"
+  fmt="num"
+/>
+
+<BigValue 
+  data={total_anulate} 
+  value=total
+  title="Total anulate"
+  fmt="num"
+/>
+
+<BigValue 
+  data={valoare_totala} 
+  value=total
+  title="Valoare totala"
+  fmt="num2b"
+/>
 
 ## [Achizitii directe](/achizitii-directe)
 
@@ -27,7 +77,7 @@ queries:
 
 ```sql total_achizitii_directe_lunar
   select
-    count(*) as total_achizitii,
+    count(*) as numar_achizitii,
     sum("item.closingValue") as valoare_totala,
     date_trunc('month', "item.publicationDate") as luna
   from achizitii_directe
@@ -41,7 +91,7 @@ queries:
   x=luna
   y=valoare_totala
   yFmt="num2m"
-  y2=total_achizitii
+  y2=numar_achizitii
   yAxisTitle="Valoare"
 />
 
@@ -51,7 +101,7 @@ queries:
 
 ```sql total_achizitii_offline_lunar
   select
-    count(*) as total_achizitii,
+    count(*) as numar_achizitii,
     sum("item.awardedValue") as valoare_totala,
     date_trunc('month', "item.publicationDate") as luna
   from achizitii_offline
@@ -63,7 +113,7 @@ queries:
   data={total_achizitii_offline_lunar}
   x=luna
   y=valoare_totala
-  y2=total_achizitii
+  y2=numar_achizitii
   yAxisTitle="Valoare"
 />
 
@@ -73,7 +123,7 @@ queries:
 
 ```sql total_licitatii_publice_lunar
   select
-    count(*) as total_licitatii,
+    count(*) as numar_licitatii,
     sum("item.ronContractValue") as valoare_totala,
     date_trunc('month', "item.noticeStateDate") as luna
   from licitatii_publice
@@ -87,7 +137,7 @@ queries:
   x=luna
   y=valoare_totala
   yFmt="num2b"
-  y2=total_licitatii
+  y2=numar_licitatii
   yAxisTitle="Valoare"
 />
 
