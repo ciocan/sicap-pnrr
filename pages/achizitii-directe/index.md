@@ -13,9 +13,12 @@ queries:
 
 ```sql achizitii_directe_by_cpv
   select
-    count(*) as nr, 
-    "item.cpvCode" as CPV,
-    sum("item.closingValue") as valoare
+    count(distinct "item.uniqueIdentificationCode") as nr,
+    "item.cpvCode" as cod_cpv,
+    concat('cpv-', split_part("item.cpvCode", ' - ', 1)) as url,
+    sum("item.closingValue") as valoare,
+    count(distinct "authority.entityId") as nr_autoritati,
+    count(distinct "supplier.entityId") as nr_beneficiari
   from pnrr.achizitii_directe
   where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "item.cpvCode"
@@ -27,7 +30,9 @@ queries:
 <DataTable data={achizitii_directe_by_cpv} rowShading=true search=true>
   <Column id="nr" title="Nr" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="CPV" title="CPV" />
+  <Column id="url" title="CPV" contentType=link linkLabel=cod_cpv />
+  <Column id="nr_autoritati" title="Nr autoritati" />
+  <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
 
 <LineBreak/>
