@@ -15,6 +15,8 @@ queries:
     count(*) as nr, 
     "item.cpvCode" as CPV,
     concat('cpv-', split_part("item.cpvCode", ' - ', 1)) as url,
+    split_part("item.cpvCode", ' - ', 1) as cod_cpv,
+    split_part("item.cpvCode", ' - ', 2) as cod_cpv_text,
     sum("item.awardedValue") as valoare,
     count(distinct "authority.entityId") as nr_autoritati,
     count(distinct "details.noticeEntityAddress.fiscalNumber") as nr_beneficiari
@@ -26,7 +28,8 @@ queries:
 <DataTable data={achizitii_offline_by_cpv} rowShading=true search=true>
   <Column id="nr" title="Nr" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="url" title="CPV" contentType=link linkLabel=CPV />
+  <Column id="url" title="CPV" contentType=link linkLabel=cod_cpv />
+  <Column id="cod_cpv_text" title="Cod CPV" />
   <Column id="nr_autoritati" title="Nr autoritati" />
   <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
