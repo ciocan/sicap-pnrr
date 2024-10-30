@@ -53,7 +53,7 @@ description: Statistici licitatii publice beneficiar PNRR
     ) as oras_autoritate,
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
-  where winners = '${params.fiscalNumber}' and "item.sysProcedureState.text" = 'Atribuita'
+  where winners = '${params.fiscalNumber}'
   order by "item.noticeStateDate" desc
 ```
 

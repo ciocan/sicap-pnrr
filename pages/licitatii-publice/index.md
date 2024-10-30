@@ -16,6 +16,7 @@ queries:
   select
     count(distinct "item.noticeNo") as nr,
     "item.cpvCodeAndName" as cod_cpv,
+    concat('cpv-', split_part("item.cpvCodeAndName", ' - ', 1)) as url,
     sum(distinct "item.ronContractValue") as valoare,
     count(distinct "item.contractingAuthorityNameAndFN") as nr_autoritati,
     count(distinct winners) as nr_beneficiari
@@ -31,7 +32,7 @@ queries:
 <DataTable data={licitatii_publice_by_cpv} rowShading=true search=true>
   <Column id="nr" title="Nr" />
   <Column id="valoare" title="Valoare" fmt="num2b" />
-  <Column id="cod_cpv" title="Cod CPV" />
+  <Column id="url" title="Cod CPV" contentType=link linkLabel=cod_cpv />
   <Column id="nr_autoritati" title="Nr autoritati" />
   <Column id="nr_beneficiari" title="Nr beneficiari" />
 </DataTable>
