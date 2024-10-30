@@ -15,7 +15,6 @@ queries:
 ```sql licitatii_publice_by_cpv
   select
     count(distinct "item.noticeNo") as nr,
-    "item.cpvCodeAndName" as cod_cpv,
     concat('cpv-', split_part("item.cpvCodeAndName", ' - ', 1)) as url,
     split_part("item.cpvCodeAndName", ' - ', 1) as cod_cpv,
     split_part("item.cpvCodeAndName", ' - ', 2) as cod_cpv_text,
@@ -25,7 +24,7 @@ queries:
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
   where "item.sysProcedureState.text" = 'Atribuita'
-  group by cod_cpv
+  group by "item.cpvCodeAndName"
   order by nr desc
 ```
 
