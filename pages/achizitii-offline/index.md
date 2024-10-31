@@ -30,8 +30,8 @@ queries:
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="url" title="CPV" contentType=link linkLabel=cod_cpv />
   <Column id="cod_cpv_text" title="Cod CPV" />
-  <Column id="nr_autoritati" title="Nr autoritati" />
-  <Column id="nr_beneficiari" title="Nr beneficiari" />
+  <Column id="nr_autoritati" title="Total autoritati" />
+  <Column id="nr_beneficiari" title="Total beneficiari" />
 </DataTable>
 
 <LineBreak/>
@@ -52,12 +52,12 @@ queries:
   order by valoare desc
 ```
 
-<DataTable data={achizitii_offline_beneficiari_valoare_mare} rowShading=true search=true rows=20>
+<DataTable data={achizitii_offline_beneficiari_valoare_mare} rowShading=true search=true rows=20 wrapTitles=true>
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="beneficiar" title="Beneficiar" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" title="Ach." />
-  <Column id="nr_autoritati" title="Aut." />
+  <Column id="nr_achizitii" title="Total achizitii" />
+  <Column id="nr_autoritati" title="Total autoritati" />
   <Column id="localitate" title="Localitate" />
 </DataTable>
 
@@ -76,12 +76,12 @@ queries:
   order by valoare desc
 ```
 
-<DataTable data={achizitii_offline_autoritati_valoare_mare} rowShading=true search=true rows=20>
+<DataTable data={achizitii_offline_autoritati_valoare_mare} rowShading=true search=true rows=20 wrapTitles=true>
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" title="Ach." />
-  <Column id="nr_beneficiari" title="Benef." />
+  <Column id="nr_achizitii" title="Total achizitii" />
+  <Column id="nr_beneficiari" title="Total beneficiari" />
 </DataTable>
 
 ## Achizitii directe pe orase (autoritate)
@@ -96,7 +96,7 @@ queries:
   order by total_achizitii desc
 ```
 
-<DataTable data={achizitii_offline_by_city_autoritate} rowShading=true search=true>
+<DataTable data={achizitii_offline_by_city_autoritate} rowShading=true search=true wrapTitles=true>
   <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_achizitii" title="Total achizitii" />
@@ -114,7 +114,7 @@ queries:
   order by total_achizitii desc
 ```
 
-<DataTable data={achizitii_offline_by_city_beneficiar} rowShading=true search=true>
+<DataTable data={achizitii_offline_by_city_beneficiar} rowShading=true search=true wrapTitles=true>
   <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_achizitii" title="Total achizitii" />

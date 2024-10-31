@@ -43,7 +43,7 @@ description: statistici achizitii offline beneficiar pnrr
   order by "item.publicationDate" desc
 ```
 
-<DataTable data={achizitii_offline_beneficiar} rowShading=true search=true rows=50>
+<DataTable data={achizitii_offline_beneficiar} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.noticeNo" />
   <Column id="item.awardedValue" title="Valoare" fmt="num2k" contentType=colorscale />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />

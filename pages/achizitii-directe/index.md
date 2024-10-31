@@ -33,8 +33,8 @@ queries:
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="url" title="CPV" contentType=link linkLabel=cod_cpv />
   <Column id="cod_cpv_text" title="Cod CPV" />
-  <Column id="nr_autoritati" title="Nr autoritati" />
-  <Column id="nr_beneficiari" title="Nr beneficiari" />
+  <Column id="nr_autoritati" title="Total autoritati" />
+  <Column id="nr_beneficiari" title="Total beneficiari" />
 </DataTable>
 
 <LineBreak/>
@@ -59,8 +59,8 @@ queries:
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="beneficiar" title="Beneficiar" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" title="Nr achizitii" />
-  <Column id="nr_autoritati" title="Nr autoritati" />
+  <Column id="nr_achizitii" title="Total achizitii" />
+  <Column id="nr_autoritati" title="Total autoritati" />
 </DataTable>
 
 ## Lista autoritati contractante
@@ -83,8 +83,8 @@ queries:
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
   <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
-  <Column id="nr_achizitii" title="Nr achizitii" />
-  <Column id="nr_beneficiari" title="Nr beneficiari" />
+  <Column id="nr_achizitii" title="Total achizitii" />
+  <Column id="nr_beneficiari" title="Total beneficiari" />
 </DataTable>
 
 ## Achizitii directe pe orase (autoritate)
