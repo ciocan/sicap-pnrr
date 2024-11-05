@@ -20,8 +20,8 @@ hide_title: true
 
 <BigValue 
   data={achizitie_stats} 
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue 
@@ -35,7 +35,7 @@ hide_title: true
 ```sql achizitie_stats
   select 
     count(distinct "item.uniqueIdentificationCode") as total_achizitii,
-    count(distinct "supplier.entityId") as total_beneficiari,
+    count(distinct "supplier.entityId") as total_furnizori,
     count(distinct "authority.entityId") as total_autoritati,
     sum("item.closingValue") as total_valoare
   from pnrr.achizitii_directe
@@ -57,10 +57,10 @@ hide_title: true
   <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="item.directAcquisitionName" title="Nume achizitie" />
-  <Column id="supplier.fiscalNumber" title="Cod fiscal beneficiar" />
-  <Column id="supplier.entityName" title="Beneficiar" />
-  <Column id="supplier.city" title="Oras beneficiar" />
-  <Column id="supplier.county" title="Judet beneficiar" />
+  <Column id="supplier.fiscalNumber" title="Cod fiscal furnizor" />
+  <Column id="supplier.entityName" title="Furnizor" />
+  <Column id="supplier.city" title="Oras furnizor" />
+  <Column id="supplier.county" title="Judet furnizor" />
   <Column id="authority.fiscalNumber" title="Cod fiscal autoritate" />
   <Column id="authority.entityName" title="Autoritate contractanta" />
   <Column id="authority.city" title="Oras autoritate" />

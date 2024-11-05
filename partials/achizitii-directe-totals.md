@@ -20,9 +20,9 @@
 />
 
 <BigValue 
-  data={achizitii_directe_total_beneficiari} 
+  data={achizitii_directe_total_furnizori} 
   value=total
-  title="Total beneficiari"
+  title="Total furnizori"
   fmt="num"
 />
 

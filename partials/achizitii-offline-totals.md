@@ -13,9 +13,9 @@
 />
 
 <BigValue 
-  data={achizitii_offline_total_beneficiari} 
+  data={achizitii_offline_total_furnizori} 
   value=total 
-  title="Total beneficiari"
+  title="Total furnizori"
   fmt="num"
 />
 

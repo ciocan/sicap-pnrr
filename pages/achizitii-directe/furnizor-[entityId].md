@@ -1,33 +1,33 @@
 ---
-title: Beneficiar
-description: statistici achizitii directe beneficiar pnrr
+title: Furnizor
+description: statistici achizitii directe furnizor pnrr
 ---
 
-# <Value data={achizitii_directe_beneficiar} row=0 column="supplier.entityName" />
-### cod fiscal: <Value data={achizitii_directe_beneficiar} row=0 column="supplier.fiscalNumber" />
-## <Value data={achizitii_directe_beneficiar} row=0 column="supplier.city" />, <Value data={achizitii_directe_beneficiar} row=0 column="supplier.county" />
+# <Value data={achizitii_directe_furnizor} row=0 column="supplier.entityName" />
+### cod fiscal: <Value data={achizitii_directe_furnizor} row=0 column="supplier.fiscalNumber" />
+## <Value data={achizitii_directe_furnizor} row=0 column="supplier.city" />, <Value data={achizitii_directe_furnizor} row=0 column="supplier.county" />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_achizitii
   title="Achizitii"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_autoritati
   title="Autoritati"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_valoare
   title="Valoare"
   fmt="num2m"
   color=green
 />
 
-```sql beneficiar_stats
+```sql furnizor_stats
   select 
     count(distinct "authority.entityId") as total_autoritati,
     count(*) as total_achizitii,
@@ -36,7 +36,7 @@ description: statistici achizitii directe beneficiar pnrr
   where "supplier.entityId" = '${params.entityId}' and "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
 ```
 
-```sql achizitii_directe_beneficiar
+```sql achizitii_directe_furnizor
   select *,
     concat('https://e-licitatie.ro/pub/direct-acquisition/view/', cast("item.directAcquisitionId" as integer)) as link
   from pnrr.achizitii_directe 
@@ -44,7 +44,7 @@ description: statistici achizitii directe beneficiar pnrr
   order by "item.publicationDate" desc
 ```
 
-<DataTable data={achizitii_directe_beneficiar} rowShading=true search=true rows=50 wrapTitles=true>
+<DataTable data={achizitii_directe_furnizor} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.uniqueIdentificationCode" />
   <Column id="item.closingValue" title="Valoare" fmt="num2k" contentType=colorscale />
   <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />

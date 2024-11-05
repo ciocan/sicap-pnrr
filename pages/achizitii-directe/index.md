@@ -5,7 +5,7 @@ queries:
   - achizitii_directe/total_atribuite.sql
   - achizitii_directe/total_anulate.sql
   - achizitii_directe/total_valoare.sql
-  - achizitii_directe/total_beneficiari.sql
+  - achizitii_directe/total_furnizori.sql
   - achizitii_directe/total_autoritati.sql
 ---
 
@@ -19,7 +19,7 @@ queries:
     concat('cpv-', split_part("item.cpvCode", ' - ', 1)) as url,
     sum("item.closingValue") as valoare,
     count(distinct "authority.entityId") as nr_autoritati,
-    count(distinct "supplier.entityId") as nr_beneficiari
+    count(distinct "supplier.entityId") as nr_furnizori
   from pnrr.achizitii_directe
   where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by "item.cpvCode"
@@ -34,18 +34,18 @@ queries:
   <Column id="url" title="CPV" contentType=link linkLabel=cod_cpv />
   <Column id="cod_cpv_text" title="Cod CPV" />
   <Column id="nr_autoritati" title="Total autoritati" />
-  <Column id="nr_beneficiari" title="Total beneficiari" />
+  <Column id="nr_furnizori" title="Total furnizori" />
 </DataTable>
 
 <LineBreak/>
 
-## Lista beneficiari
+## Lista furnizori
 
-```sql achizitii_directe_beneficiari_valoare_mare
+```sql achizitii_directe_furnizori_valoare_mare
   select
-    concat('beneficiar-', cast("supplier.entityId" as integer)) as url,
+    concat('furnizor-', cast("supplier.entityId" as integer)) as url,
     "supplier.fiscalNumber" as cod_fiscal,
-    "supplier.entityName" as beneficiar,
+    "supplier.entityName" as furnizor,
     sum("item.closingValue") as valoare,
     count(*) as nr_achizitii,
     count(distinct "authority.entityId") as nr_autoritati
@@ -55,9 +55,9 @@ queries:
   order by sum("item.closingValue") desc
 ```
 
-<DataTable data={achizitii_directe_beneficiari_valoare_mare} rowShading=true search=true rows=20>
+<DataTable data={achizitii_directe_furnizori_valoare_mare} rowShading=true search=true rows=20>
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
-  <Column id="beneficiar" title="Beneficiar" />
+  <Column id="furnizor" title="Furnizor" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_achizitii" title="Total achizitii" />
   <Column id="nr_autoritati" title="Total autoritati" />
@@ -72,7 +72,7 @@ queries:
     "authority.entityName" as autoritate_contractanta,
     sum("item.closingValue") as valoare,
     count(*) as nr_achizitii,
-    count(distinct "supplier.entityId") as nr_beneficiari
+    count(distinct "supplier.entityId") as nr_furnizori
   from pnrr.achizitii_directe
   where "item.sysDirectAcquisitionState.text" = 'Oferta acceptata'
   group by all
@@ -84,7 +84,7 @@ queries:
   <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_achizitii" title="Total achizitii" />
-  <Column id="nr_beneficiari" title="Total beneficiari" />
+  <Column id="nr_furnizori" title="Total furnizori" />
 </DataTable>
 
 ## Achizitii directe pe orase (autoritate)
@@ -106,9 +106,9 @@ queries:
   <Column id="total_achizitii" title="Total achizitii" />
 </DataTable>
 
-## Achizitii directe pe orase (beneficiar)
+## Achizitii directe pe orase (furnizor)
 
-```sql achizitii_directe_by_city_beneficiar
+```sql achizitii_directe_by_city_furnizor
   select
     count(*) as total_achizitii, 
     "supplier.city" as oras,
@@ -119,7 +119,7 @@ queries:
   order by total_achizitii desc
 ```
 
-<DataTable data={achizitii_directe_by_city_beneficiar} rowShading=true search=true>
+<DataTable data={achizitii_directe_by_city_furnizor} rowShading=true search=true>
   <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_achizitii" title="Total achizitii" />

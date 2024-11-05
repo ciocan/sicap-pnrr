@@ -1,33 +1,33 @@
 ---
-title: Beneficiar
-description: Statistici licitatii publice beneficiar PNRR
+title: Furnizor
+description: Statistici licitatii publice furnizor PNRR
 ---
 
-# <Value data={licitatii_publice_beneficiar} row=0 column="beneficiar" />
-### cod fiscal: <Value data={licitatii_publice_beneficiar} row=0 column="noticeContracts.items.winners.fiscalNumber" />
-## <Value data={licitatii_publice_beneficiar} row=0 column="oras" />, <Value data={licitatii_publice_beneficiar} row=0 column="judet" />
+# <Value data={licitatii_publice_furnizor} row=0 column="furnizor" />
+### cod fiscal: <Value data={licitatii_publice_furnizor} row=0 column="noticeContracts.items.winners.fiscalNumber" />
+## <Value data={licitatii_publice_furnizor} row=0 column="oras" />, <Value data={licitatii_publice_furnizor} row=0 column="judet" />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_licitatii
   title="Licitatii"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_autoritati
   title="Autoritati"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_valoare
   title="Valoare"
   fmt="num2m"
   color=green
 />
 
-```sql beneficiar_stats
+```sql furnizor_stats
   select 
     count(distinct "item.noticeNo") as total_licitatii,
     count(distinct "item.contractingAuthorityNameAndFN") as total_autoritati,
@@ -37,14 +37,14 @@ description: Statistici licitatii publice beneficiar PNRR
   where winners = '${params.fiscalNumber}' and "item.sysProcedureState.text" = 'Atribuita'
 ```
 
-```sql licitatii_publice_beneficiar
+```sql licitatii_publice_furnizor
   select *,
     case 
       when "item.noticeNo" like 'SCNA%' then concat('https://e-licitatie.ro/pub/notices/ca-notices/view-rfq/', cast("item.caNoticeId" as integer))
       when "item.noticeNo" like 'CAN%' then concat('https://e-licitatie.ro/pub/notices/ca-notices/view-c/', cast("item.caNoticeId" as integer))
       else concat('#/', cast("item.caNoticeId" as integer))
     end as link,
-    "noticeContracts.items.winners.name" as beneficiar,
+    "noticeContracts.items.winners.name" as furnizor,
     "noticeContracts.items.winners.address.city" as oras,
     "noticeContracts.items.winners.address.county.text" as judet,
     coalesce(
@@ -57,7 +57,7 @@ description: Statistici licitatii publice beneficiar PNRR
   order by "item.noticeStateDate" desc
 ```
 
-<DataTable data={licitatii_publice_beneficiar} rowShading=true search=true rows=50 wrapTitles=true>
+<DataTable data={licitatii_publice_furnizor} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod licitatie" contentType=link linkLabel="item.noticeNo" />
   <Column id="item.ronContractValue" title="Valoare" fmt="num2m" contentType=colorscale />
   <Column id="item.sysProcedureState.text" title="Stare licitatie" />

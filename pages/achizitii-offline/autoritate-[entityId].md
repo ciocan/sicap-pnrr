@@ -14,8 +14,8 @@ description: statistici achizitii offline pnrr
 
 <BigValue 
   data={achizitie_offline_stats} 
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue 
@@ -28,7 +28,7 @@ description: statistici achizitii offline pnrr
 
 ```sql achizitie_offline_stats
   select 
-    count(distinct "details.noticeEntityAddress.fiscalNumber") as total_beneficiari,
+    count(distinct "details.noticeEntityAddress.fiscalNumber") as total_furnizori,
     count(*) as total_achizitii,
     sum("item.awardedValue") as total_valoare
   from achizitii_offline 
@@ -49,7 +49,7 @@ description: statistici achizitii offline pnrr
   <Column id="details.finalizationDate" title="Data finalizare" fmt="dd-mm-yyyy" />
   <Column id="item.contractObject" title="Nume achizitie" />
   <Column id="details.noticeEntityAddress.fiscalNumber" title="Cod fiscal" />
-  <Column id="details.noticeEntityAddress.organization" title="Beneficiar" />
+  <Column id="details.noticeEntityAddress.organization" title="Furnizor" />
   <Column id="details.noticeEntityAddress.city" title="Oras" />
   <Column id="item.cpvCode" title="Cod CPV" />
 </DataTable>

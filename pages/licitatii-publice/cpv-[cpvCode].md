@@ -20,8 +20,8 @@ hide_title: true
 
 <BigValue
   data={cpv_stats}
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue
@@ -36,7 +36,7 @@ hide_title: true
   select 
     count(distinct "item.noticeNo") as total_licitatii,
     count(distinct "item.contractingAuthorityNameAndFN") as total_autoritati,
-    count(distinct winners) as total_beneficiari,
+    count(distinct winners) as total_furnizori,
     sum(distinct "item.ronContractValue") as total_valoare
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
@@ -70,10 +70,10 @@ hide_title: true
       '-'
     ) as judet_autoritate,
 
-    "noticeContracts.items.winners.name" as beneficiar,
-    "noticeContracts.items.winners.address.city" as oras_beneficiar,
-    "noticeContracts.items.winners.address.county.text" as judet_beneficiar,
-    "noticeContracts.items.winners.fiscalNumber" as cod_fiscal_beneficiar,
+    "noticeContracts.items.winners.name" as furnizor,
+    "noticeContracts.items.winners.address.city" as oras_furnizor,
+    "noticeContracts.items.winners.address.county.text" as judet_furnizor,
+    "noticeContracts.items.winners.fiscalNumber" as cod_fiscal_furnizor,
 
   from licitatii_publice
   where '${params.cpvCode}' = split_part("item.cpvCodeAndName", ' - ', 1)
@@ -86,10 +86,10 @@ hide_title: true
   <Column id="stare_licitatie" title="Stare licitatie" />
   <Column id="data_publicare" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="nume_licitatie" title="Nume licitatie" contentType=html />
-  <Column id="cod_fiscal_beneficiar" title="Cod fiscal beneficiar" />
-  <Column id="beneficiar" title="Beneficiar" />
-  <Column id="oras_beneficiar" title="Oras beneficiar" />
-  <Column id="judet_beneficiar" title="Judet beneficiar" />
+  <Column id="cod_fiscal_furnizor" title="Cod fiscal furnizor" />
+  <Column id="furnizor" title="Furnizor" />
+  <Column id="oras_furnizor" title="Oras furnizor" />
+  <Column id="judet_furnizor" title="Judet furnizor" />
   <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="oras_autoritate" title="Oras autoritate" />
   <Column id="judet_autoritate" title="Judet autoritate" />

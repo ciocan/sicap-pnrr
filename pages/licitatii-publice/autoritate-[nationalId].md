@@ -14,8 +14,8 @@ description: statistici licitatii publice pnrr
 
 <BigValue
   data={licitatii_publice_autoritate_stats}
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue
@@ -29,7 +29,7 @@ description: statistici licitatii publice pnrr
 ```sql licitatii_publice_autoritate_stats
   select 
     count(distinct "item.noticeNo") as total_licitatii,
-    count(distinct winners) as total_beneficiari,
+    count(distinct winners) as total_furnizori,
     sum(distinct"item.ronContractValue") as total_valoare
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
@@ -61,7 +61,7 @@ description: statistici licitatii publice pnrr
       else concat('#/', cast("item.caNoticeId" as integer))
     end as link,
     "item.sysProcedureState.text" as stare_licitatie,
-    "noticeContracts.items.winners.name" as beneficiar,
+    "noticeContracts.items.winners.name" as furnizor,
     "noticeContracts.items.winners.fiscalNumber" as cod_fiscal,
     "item.cpvCodeAndName" as cod_cpv
   from licitatii_publice
@@ -76,6 +76,6 @@ description: statistici licitatii publice pnrr
   <Column id="data_publicare" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="nume_licitatie" title="Nume licitatie" />
   <Column id="cod_fiscal" title="Cod fiscal" />
-  <Column id="beneficiar" title="Beneficiar" />
+  <Column id="furnizor" title="Furnizor" />
   <Column id="cod_cpv" title="Cod CPV" />
 </DataTable>

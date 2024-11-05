@@ -6,7 +6,7 @@ queries:
   - licitatii_publice/total_anulate.sql
   - licitatii_publice/total_valoare.sql
   - licitatii_publice/total_autoritati.sql
-  - licitatii_publice/total_beneficiari.sql
+  - licitatii_publice/total_furnizori.sql
 ---
 
 {@partial "licitatii-publice-totals.md"}
@@ -20,7 +20,7 @@ queries:
     split_part("item.cpvCodeAndName", ' - ', 2) as cod_cpv_text,
     sum(distinct "item.ronContractValue") as valoare,
     count(distinct "item.contractingAuthorityNameAndFN") as nr_autoritati,
-    count(distinct winners) as nr_beneficiari
+    count(distinct winners) as nr_furnizori
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
   where "item.sysProcedureState.text" = 'Atribuita'
@@ -36,21 +36,21 @@ queries:
   <Column id="url" title="Cod CPV" contentType=link linkLabel=cod_cpv />
   <Column id="cod_cpv_text" title="Cod CPV" />
   <Column id="nr_autoritati" title="Total autoritati" />
-  <Column id="nr_beneficiari" title="Total beneficiari" />
+  <Column id="nr_furnizori" title="Total furnizori" />
 </DataTable>
 
 <LineBreak/>
 
-## Lista beneficiari
+## Lista furnizori
 
-```sql licitatii_publice_beneficiari_valoare_mare
+```sql licitatii_publice_furnizori_valoare_mare
   select
-    concat('beneficiar-', trim(winners)) as url,
+    concat('furnizor-', trim(winners)) as url,
     winners as cod_fiscal,
     count(distinct "item.noticeNo") as nr_licitatii,
     sum(distinct "item.ronContractValue") as valoare,
     count(distinct "item.contractingAuthorityNameAndFN") as nr_autoritati,
-    "noticeContracts.items.winners.name" as beneficiar
+    "noticeContracts.items.winners.name" as furnizor
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
   where "item.sysProcedureState.text" = 'Atribuita'
@@ -58,9 +58,9 @@ queries:
   order by valoare desc
 ```
 
-<DataTable data={licitatii_publice_beneficiari_valoare_mare} rowShading=true search=true>
+<DataTable data={licitatii_publice_furnizori_valoare_mare} rowShading=true search=true>
   <Column id="url" title="Cod fiscal" contentType=link linkLabel=cod_fiscal />
-  <Column id="beneficiar" title="Beneficiar" />
+  <Column id="furnizor" title="Furnizor" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_licitatii" title="Total licitatii" />
   <Column id="nr_autoritati" title="Total autoritati" />
@@ -75,7 +75,7 @@ queries:
     substring("item.contractingAuthorityNameAndFN", position('-' in "item.contractingAuthorityNameAndFN") + 1) as autoritate_contractanta,
     sum(distinct "item.ronContractValue") as valoare,
     count(distinct "item.noticeNo") as nr_licitatii,
-    count(distinct winners) as nr_beneficiari
+    count(distinct winners) as nr_furnizori
   from licitatii_publice,
     unnest(string_split("noticeContracts.items.winners.fiscalNumber", ',')) as t(winners)
   where "item.sysProcedureState.text" = 'Atribuita'
@@ -88,7 +88,7 @@ queries:
   <Column id="autoritate_contractanta" title="Autoritate contractanta" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="nr_licitatii" title="Total licitatii" />
-  <Column id="nr_beneficiari" title="Total beneficiari" />
+  <Column id="nr_furnizori" title="Total furnizori" />
 </DataTable>
 
 ## Licitatii pe orase (autoritate contractanta)
@@ -113,9 +113,9 @@ queries:
   <Column id="total_licitatii" title="Total licitatii" />
 </DataTable>
 
-## Licitatii pe orase (beneficiar)
+## Licitatii pe orase (furnizor)
 
-```sql licitatii_publice_by_city_beneficiar
+```sql licitatii_publice_by_city_furnizor
   select
     count(distinct "item.noticeNo") as total_licitatii,
     trim(t.oras) as oras,
@@ -135,7 +135,7 @@ queries:
   order by total_licitatii desc
 ```
 
-<DataTable data={licitatii_publice_by_city_beneficiar} rowShading=true search=true>
+<DataTable data={licitatii_publice_by_city_furnizor} rowShading=true search=true>
   <Column id="oras" title="Oras" />
   <Column id="valoare" title="Valoare" fmt="num2m" />
   <Column id="total_licitatii" title="Total licitatii" />

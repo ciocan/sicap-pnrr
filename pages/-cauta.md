@@ -45,8 +45,8 @@ hide_title: true
     <Column id="item.sysDirectAcquisitionState.text" title="Stare achizitie" />
     <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
     <Column id="item.directAcquisitionName" title="Nume achizitie" />
-    <Column id="supplier.fiscalNumber" title="Cod fiscal beneficiar" />
-    <Column id="supplier.entityName" title="Beneficiar" />
+    <Column id="supplier.fiscalNumber" title="Cod fiscal furnizor" />
+    <Column id="supplier.entityName" title="Furnizor" />
     <Column id="authority.fiscalNumber" title="Cod fiscal autoritate" />
     <Column id="authority.entityName" title="Autoritate contractanta" />
     <Column id="authority.city" title="Oras autoritate" />
@@ -76,9 +76,9 @@ hide_title: true
     <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
     <Column id="details.finalizationDate" title="Data finalizare" fmt="dd-mm-yyyy" />
     <Column id="item.contractObject" title="Nume achizitie" />
-    <Column id="details.noticeEntityAddress.fiscalNumber" title="Cod fiscal beneficiar" />
-    <Column id="details.noticeEntityAddress.organization" title="Beneficiar" />
-    <Column id="details.noticeEntityAddress.city" title="Oras beneficiar" />
+    <Column id="details.noticeEntityAddress.fiscalNumber" title="Cod fiscal furnizor" />
+    <Column id="details.noticeEntityAddress.organization" title="Furnizor" />
+    <Column id="details.noticeEntityAddress.city" title="Oras furnizor" />
     <Column id="authority.fiscalNumber" title="Cod fiscal autoritate" />
     <Column id="authority.entityName" title="Autoritate contractanta" />
     <Column id="authority.city" title="Oras autoritate" />
@@ -94,7 +94,7 @@ hide_title: true
         when "item.noticeNo" like 'CAN%' then concat('https://e-licitatie.ro/pub/notices/ca-notices/view-c/', cast("item.caNoticeId" as integer))
         else concat('#/', cast("item.caNoticeId" as integer))
       end as link,
-      "noticeContracts.items.winners.name" as beneficiar,
+      "noticeContracts.items.winners.name" as furnizor,
       "noticeContracts.items.winners.address.city" as oras,
       "noticeContracts.items.winners.address.county.text" as judet,
       coalesce(
@@ -125,10 +125,10 @@ hide_title: true
     <Column id="item.sysProcedureState.text" title="Stare licitatie" />
     <Column id="item.noticeStateDate" title="Data publicare" fmt="dd-mm-yyyy" />
     <Column id="item.contractTitle" title="Nume licitatie" />
-    <Column id="noticeContracts.items.winners.fiscalNumber" title="Cod fiscal beneficiar" />
-    <Column id="noticeContracts.items.winners.name" title="Beneficiar" />
-    <Column id="noticeContracts.items.winners.address.city" title="Oras beneficiar" />
-    <Column id="noticeContracts.items.winners.address.county.text" title="Judet beneficiar" />
+    <Column id="noticeContracts.items.winners.fiscalNumber" title="Cod fiscal furnizor" />
+    <Column id="noticeContracts.items.winners.name" title="Furnizor" />
+    <Column id="noticeContracts.items.winners.address.city" title="Oras furnizor" />
+    <Column id="noticeContracts.items.winners.address.county.text" title="Judet furnizor" />
     <Column id="item.contractingAuthorityNameAndFN" title="Autoritate contractanta" />
     <Column id="oras_autoritate" title="Oras autoritate" />
     <Column id="judet_autoritate" title="Judet autoritate" />

@@ -20,8 +20,8 @@ hide_title: true
 
 <BigValue 
   data={achizitie_offline_stats} 
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue 
@@ -35,7 +35,7 @@ hide_title: true
 ```sql achizitie_offline_stats
   select 
     count(*) as total_achizitii,
-    count(distinct "details.noticeEntityAddress.fiscalNumber") as total_beneficiari,
+    count(distinct "details.noticeEntityAddress.fiscalNumber") as total_furnizori,
     count(distinct "authority.entityId") as total_autoritati,
     sum("item.awardedValue") as total_valoare
   from achizitii_offline 
@@ -55,9 +55,9 @@ hide_title: true
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="details.finalizationDate" title="Data finalizare" fmt="dd-mm-yyyy" />
   <Column id="item.contractObject" title="Nume achizitie" />
-  <Column id="details.noticeEntityAddress.fiscalNumber" title="Cod fiscal beneficiar" />
-  <Column id="details.noticeEntityAddress.organization" title="Beneficiar" />
-  <Column id="details.noticeEntityAddress.city" title="Oras beneficiar" />
+  <Column id="details.noticeEntityAddress.fiscalNumber" title="Cod fiscal furnizor" />
+  <Column id="details.noticeEntityAddress.organization" title="Furnizor" />
+  <Column id="details.noticeEntityAddress.city" title="Oras furnizor" />
   <Column id="authority.fiscalNumber" title="Cod fiscal autoritate" />
   <Column id="authority.entityName" title="Autoritate" />
   <Column id="authority.city" title="Oras autoritate" />

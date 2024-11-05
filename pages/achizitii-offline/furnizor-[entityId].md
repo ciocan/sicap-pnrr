@@ -1,32 +1,32 @@
 ---
-title: Beneficiar
-description: statistici achizitii offline beneficiar pnrr
+title: Furnizor
+description: statistici achizitii offline furnizor pnrr
 ---
 
-# <Value data={achizitii_offline_beneficiar} row=0 column="details.noticeEntityAddress.organization" />
-### cod fiscal: <Value data={achizitii_offline_beneficiar} row=0 column="details.noticeEntityAddress.fiscalNumber" />, <Value data={achizitii_offline_beneficiar} row=0 column="details.noticeEntityAddress.city" />
+# <Value data={achizitii_offline_furnizor} row=0 column="details.noticeEntityAddress.organization" />
+### cod fiscal: <Value data={achizitii_offline_furnizor} row=0 column="details.noticeEntityAddress.fiscalNumber" />, <Value data={achizitii_offline_furnizor} row=0 column="details.noticeEntityAddress.city" />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_achizitii
   title="Achizitii"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_autoritati
   title="Autoritati"
 />
 
 <BigValue 
-  data={beneficiar_stats} 
+  data={furnizor_stats} 
   value=total_valoare
   title="Valoare"
   fmt="num2m"
   color=green
 />
 
-```sql beneficiar_stats
+```sql furnizor_stats
   select
     count(distinct "authority.entityId") as total_autoritati,
     count(*) as total_achizitii,
@@ -35,7 +35,7 @@ description: statistici achizitii offline beneficiar pnrr
   where "details.noticeEntityAddress.fiscalNumber" = '${params.entityId}'
 ```
 
-```sql achizitii_offline_beneficiar
+```sql achizitii_offline_furnizor
   select *,
     concat('https://e-licitatie.ro/pub/direct-acquisition/award-notice/view/', cast("item.daAwardNoticeId" as integer)) as link
   from achizitii_offline 
@@ -43,7 +43,7 @@ description: statistici achizitii offline beneficiar pnrr
   order by "item.publicationDate" desc
 ```
 
-<DataTable data={achizitii_offline_beneficiar} rowShading=true search=true rows=50 wrapTitles=true>
+<DataTable data={achizitii_offline_furnizor} rowShading=true search=true rows=50 wrapTitles=true>
   <Column id="link" openInNewTab=true title="Cod achizitie" contentType=link linkLabel="item.noticeNo" />
   <Column id="item.awardedValue" title="Valoare" fmt="num2k" contentType=colorscale />
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />

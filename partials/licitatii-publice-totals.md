@@ -27,8 +27,8 @@
 />
 
 <BigValue 
-  data={licitatii_publice_total_beneficiari} 
-  value=total_beneficiari
-  title="Total beneficiari"
+  data={licitatii_publice_total_furnizori} 
+  value=total_furnizori
+  title="Total furnizori"
   fmt="num"
 />

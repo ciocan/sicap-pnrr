@@ -14,8 +14,8 @@ description: statistici achizitii directe pnrr
 
 <BigValue 
   data={achizitie_stats} 
-  value=total_beneficiari
-  title="Beneficiari"
+  value=total_furnizori
+  title="Furnizori"
 />
 
 <BigValue 
@@ -28,7 +28,7 @@ description: statistici achizitii directe pnrr
 
 ```sql achizitie_stats
   select 
-    count(distinct "supplier.entityId") as total_beneficiari,
+    count(distinct "supplier.entityId") as total_furnizori,
     count(*) as total_achizitii,
     sum("item.closingValue") as total_valoare
   from pnrr.achizitii_directe
@@ -50,7 +50,7 @@ description: statistici achizitii directe pnrr
   <Column id="item.publicationDate" title="Data publicare" fmt="dd-mm-yyyy" />
   <Column id="item.directAcquisitionName" title="Nume achizitie" />
   <Column id="supplier.fiscalNumber" title="Cod fiscal" />
-  <Column id="supplier.entityName" title="Beneficiar" />
+  <Column id="supplier.entityName" title="Furnizor" />
   <Column id="supplier.city" title="Oras" />
   <Column id="supplier.county" title="Judet" />
   <Column id="item.cpvCode" title="Cod CPV" />
